@@ -31,22 +31,22 @@ extension UIView {
     func centerXInSuperview() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
-        newFrame.origin.x = superview.frame.midX - self.bounds.midX
+        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
         self.frame = newFrame
     }
     
     func centerYInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
-        newFrame.origin.y = superview.frame.midY - self.bounds.midY
+        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
         self.frame = newFrame
     }
     
     func centerInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
-        newFrame.origin.x = superview.frame.midX - self.bounds.midX
-        newFrame.origin.y = superview.frame.midY - self.bounds.midY
+        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
+        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
         self.frame = newFrame
     }
     
@@ -63,7 +63,7 @@ extension UIView {
             self.frame = newFrame
             break
         case .topMiddle:
-            newFrame.origin.x = superview.frame.midX - self.bounds.midX
+            newFrame.origin.x = superview.bounds.midX - self.bounds.midX
             newFrame.origin.y = 0
             self.frame = newFrame
             break
@@ -74,7 +74,7 @@ extension UIView {
             break
         case .middleLeft:
             newFrame.origin.x = 0
-            newFrame.origin.y = superview.frame.midY - self.bounds.midY
+            newFrame.origin.y = superview.bounds.midY - self.bounds.midY
             self.frame = newFrame
             break
         case .bottomLeft:
@@ -83,7 +83,7 @@ extension UIView {
             self.frame = newFrame
             break
         case .bottomMiddle:
-            newFrame.origin.x = superview.frame.midX - self.bounds.midX
+            newFrame.origin.x = superview.bounds.midX - self.bounds.midX
             newFrame.origin.y = superview.bounds.height - self.bounds.height
             self.frame = newFrame
             break
@@ -94,7 +94,7 @@ extension UIView {
             break
         case .middleRight:
             newFrame.origin.x = superview.bounds.width - self.bounds.width
-            newFrame.origin.y = superview.frame.midY - self.bounds.midY
+            newFrame.origin.y = superview.bounds.midY - self.bounds.midY
             self.frame = newFrame
             break
         case .middle:
