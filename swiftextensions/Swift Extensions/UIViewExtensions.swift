@@ -50,10 +50,9 @@ extension UIView {
         self.frame = newFrame
     }
     
-    func pinTo(_ position:UIViewPinPosition?) {
+    func pinTo(_ position:UIViewPinPosition) {
         
         guard let superview = self.superview else { return }
-        guard let position = position else { return }
         
         var newFrame = self.frame
         
