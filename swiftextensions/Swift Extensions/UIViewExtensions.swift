@@ -10,14 +10,14 @@ import UIKit
 
 enum UIViewPinPosition:Int {
     case topLeft = 0,
-    topMiddle = 1,
-    topRight = 2,
-    middleRight = 3,
-    bottomRight = 4,
-    bottomMiddle = 5,
-    bottomLeft = 6,
-    middleLeft = 7,
-    middle = 8
+    topMiddle,
+    topRight,
+    middleRight,
+    bottomRight,
+    bottomMiddle,
+    bottomLeft,
+    middleLeft,
+    middle
 }
 
 extension UIView {
@@ -31,28 +31,30 @@ extension UIView {
     func centerXInSuperview() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
-        newFrame.origin.x = superview.frame.midX - self.bounds.width / 2
+        newFrame.origin.x = superview.frame.midX - self.bounds.midX
         self.frame = newFrame
     }
     
     func centerYInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
-        newFrame.origin.y = superview.frame.midY - self.bounds.height / 2
+        newFrame.origin.y = superview.frame.midY - self.bounds.midY
         self.frame = newFrame
     }
     
     func centerInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
-        newFrame.origin.x = superview.frame.midX - self.bounds.width / 2
-        newFrame.origin.y = superview.frame.midY - self.bounds.height / 2
+        newFrame.origin.x = superview.frame.midX - self.bounds.midX
+        newFrame.origin.y = superview.frame.midY - self.bounds.midY
         self.frame = newFrame
     }
     
-    func pinTo(_ position:UIViewPinPosition) {
+    func pinTo(_ position:UIViewPinPosition?) {
         
         guard let superview = self.superview else { return }
+        guard let position = position else { return }
+        
         var newFrame = self.frame
         
         switch position {
