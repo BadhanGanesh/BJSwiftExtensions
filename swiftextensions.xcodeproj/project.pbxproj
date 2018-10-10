@@ -12,6 +12,8 @@
 		A614C847216DFB4800EA8051 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A614C845216DFB4800EA8051 /* Main.storyboard */; };
 		A614C849216DFB4B00EA8051 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A614C848216DFB4B00EA8051 /* Assets.xcassets */; };
 		A614C84C216DFB4B00EA8051 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A614C84A216DFB4B00EA8051 /* LaunchScreen.storyboard */; };
+		A614C854216DFBA200EA8051 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C853216DFBA200EA8051 /* UIViewExtensions.swift */; };
+		A614C857216E072E00EA8051 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C856216E072E00EA8051 /* UILabelExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		A614C848216DFB4B00EA8051 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A614C84B216DFB4B00EA8051 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A614C84D216DFB4B00EA8051 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A614C853216DFBA200EA8051 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		A614C856216E072E00EA8051 /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		A614C840216DFB4800EA8051 /* swiftextensions */ = {
 			isa = PBXGroup;
 			children = (
+				A614C855216E05E500EA8051 /* Swift Extensions */,
 				A614C841216DFB4800EA8051 /* AppDelegate.swift */,
 				A614C843216DFB4800EA8051 /* ViewController.swift */,
 				A614C845216DFB4800EA8051 /* Main.storyboard */,
@@ -62,6 +67,15 @@
 				A614C84D216DFB4B00EA8051 /* Info.plist */,
 			);
 			path = swiftextensions;
+			sourceTree = "<group>";
+		};
+		A614C855216E05E500EA8051 /* Swift Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A614C853216DFBA200EA8051 /* UIViewExtensions.swift */,
+				A614C856216E072E00EA8051 /* UILabelExtensions.swift */,
+			);
+			path = "Swift Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +149,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A614C857216E072E00EA8051 /* UILabelExtensions.swift in Sources */,
 				A614C844216DFB4800EA8051 /* ViewController.swift in Sources */,
+				A614C854216DFBA200EA8051 /* UIViewExtensions.swift in Sources */,
 				A614C842216DFB4800EA8051 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
