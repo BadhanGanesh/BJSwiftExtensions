@@ -14,6 +14,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
 
-
+    @IBAction func pinButtonTouched(_ sender: UIButton) {
+        self.view.viewWithTag(100)?.pinTo(UIViewPinPosition(rawValue: sender.tag)!)
+    }
+    
 }
 
