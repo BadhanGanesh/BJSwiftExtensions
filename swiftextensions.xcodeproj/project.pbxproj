@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		532B645D2173A99F00A28413 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */; };
 		A614C842216DFB4800EA8051 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C841216DFB4800EA8051 /* AppDelegate.swift */; };
 		A614C844216DFB4800EA8051 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C843216DFB4800EA8051 /* ViewController.swift */; };
 		A614C847216DFB4800EA8051 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A614C845216DFB4800EA8051 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		A614C83E216DFB4800EA8051 /* swiftextensions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftextensions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A614C841216DFB4800EA8051 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A614C843216DFB4800EA8051 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				A614C853216DFBA200EA8051 /* UIViewExtensions.swift */,
 				A614C856216E072E00EA8051 /* UILabelExtensions.swift */,
+				532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */,
 			);
 			path = "Swift Extensions";
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				A614C857216E072E00EA8051 /* UILabelExtensions.swift in Sources */,
 				A614C844216DFB4800EA8051 /* ViewController.swift in Sources */,
+				532B645D2173A99F00A28413 /* UIViewControllerExtensions.swift in Sources */,
 				A614C854216DFBA200EA8051 /* UIViewExtensions.swift in Sources */,
 				A614C842216DFB4800EA8051 /* AppDelegate.swift in Sources */,
 			);

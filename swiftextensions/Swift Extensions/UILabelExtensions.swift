@@ -10,7 +10,7 @@ import UIKit
 
 extension UILabel {
     
-    func normalizeFont(multiplier primaryMultiplier:Double? = nil) {
+    @objc func normalizeFont() {
         
         let deviceScaleFactor = UIScreen.main.scale
         let isiPad = UIDevice.current.userInterfaceIdiom == .pad
@@ -18,10 +18,15 @@ extension UILabel {
         let deviceHeight:Double = Double(UIScreen.main.bounds.height)
         
         let secondaryMultiplier = deviceScaleFactor == 1.0 ? 0.35 : deviceScaleFactor == 2.0 ? 0.55 : 0.7
-        let finalMultiplier:CGFloat = CGFloat(primaryMultiplier ?? deviceWidth/deviceHeight + (isiPad ? 0.8 : secondaryMultiplier))
+        let finalMultiplier:CGFloat = CGFloat((deviceWidth/deviceHeight) + (isiPad ? 0.8 : secondaryMultiplier))
         
         let newFont = UIFont.init(name: self.font.fontName, size: self.font.pointSize * finalMultiplier)
         
+        self.font = newFont
+    }
+    
+    @objc func normalizeFont(multiplier primaryMultiplier:Double) {
+        let newFont = UIFont.init(name: self.font.fontName, size: self.font.pointSize * CGFloat(primaryMultiplier))
         self.font = newFont
     }
     
