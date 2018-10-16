@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		532B645D2173A99F00A28413 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */; };
+		533AAA9421767C5C00AC6BA4 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533AAA9321767C5C00AC6BA4 /* UIFontExtensions.swift */; };
 		A614C842216DFB4800EA8051 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C841216DFB4800EA8051 /* AppDelegate.swift */; };
 		A614C844216DFB4800EA8051 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614C843216DFB4800EA8051 /* ViewController.swift */; };
 		A614C847216DFB4800EA8051 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A614C845216DFB4800EA8051 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		533AAA9321767C5C00AC6BA4 /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
 		A614C83E216DFB4800EA8051 /* swiftextensions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftextensions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A614C841216DFB4800EA8051 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A614C843216DFB4800EA8051 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				A614C853216DFBA200EA8051 /* UIViewExtensions.swift */,
 				A614C856216E072E00EA8051 /* UILabelExtensions.swift */,
 				532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */,
+				533AAA9321767C5C00AC6BA4 /* UIFontExtensions.swift */,
 			);
 			path = "Swift Extensions";
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			files = (
 				A614C857216E072E00EA8051 /* UILabelExtensions.swift in Sources */,
 				A614C844216DFB4800EA8051 /* ViewController.swift in Sources */,
+				533AAA9421767C5C00AC6BA4 /* UIFontExtensions.swift in Sources */,
 				532B645D2173A99F00A28413 /* UIViewControllerExtensions.swift in Sources */,
 				A614C854216DFBA200EA8051 /* UIViewExtensions.swift in Sources */,
 				A614C842216DFB4800EA8051 /* AppDelegate.swift in Sources */,

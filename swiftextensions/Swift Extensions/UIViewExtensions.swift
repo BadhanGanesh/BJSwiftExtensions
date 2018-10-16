@@ -43,12 +43,15 @@ enum UIViewPinPosition:Int {
 
 extension UIView {
     
+    //
     ////////////////////////////////////////////////////////////////
     //MARK:-
     //MARK:View Positioning
     //MARK:-
     ////////////////////////////////////////////////////////////////
+    //
     
+    ///Centers the view along X-axis in its superview.
     func centerXInSuperview() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
@@ -56,6 +59,7 @@ extension UIView {
         self.frame = newFrame
     }
     
+    ///Centers the view along Y-axis in its superview.
     func centerYInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
@@ -63,6 +67,7 @@ extension UIView {
         self.frame = newFrame
     }
     
+    ///Centers the view in its superview.
     func centerInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
@@ -70,6 +75,24 @@ extension UIView {
         newFrame.origin.y = superview.bounds.midY - self.bounds.midY
         self.frame = newFrame
     }
+    
+    /**
+     
+     - Parameter position: The position you want to pin the view to its superview. See **Discussion** for possible values.
+     
+     Pins the view to the specified position in its superview. Use one of the below values:
+     
+     * topLeft
+     * topMiddle
+     * topRight
+     * middleRight
+     * bottomRight
+     * bottomMiddle
+     * bottomLeft
+     * middleLeft
+     * middle
+     
+     */
     
     func pinTo(_ position:UIViewPinPosition) {
         
@@ -123,11 +146,13 @@ extension UIView {
         }
     }
     
+    //
     ////////////////////////////////////////////////////////////////
     //MARK:-
     //MARK:View Styling
     //MARK:-
     ////////////////////////////////////////////////////////////////
+    //
     
     func setCornerRadius(_ amount:CGFloat, borderWidthAmount:CGFloat, borderColor:UIColor) {
         self.layer.masksToBounds = true
