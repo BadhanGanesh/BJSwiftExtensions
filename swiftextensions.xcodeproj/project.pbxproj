@@ -21,6 +21,7 @@
 /* Begin PBXFileReference section */
 		532B645C2173A99F00A28413 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		533AAA9321767C5C00AC6BA4 /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
+		533DF35C217B2950007C5239 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		A614C83E216DFB4800EA8051 /* swiftextensions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftextensions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A614C841216DFB4800EA8051 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A614C843216DFB4800EA8051 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 				A614C848216DFB4B00EA8051 /* Assets.xcassets */,
 				A614C84A216DFB4B00EA8051 /* LaunchScreen.storyboard */,
 				A614C84D216DFB4B00EA8051 /* Info.plist */,
+				533DF35C217B2950007C5239 /* README.md */,
 			);
 			path = swiftextensions;
 			sourceTree = "<group>";

@@ -29,7 +29,7 @@
 
 import UIKit
 
-enum UIViewPinPosition:Int {
+@objc enum UIViewPinPosition:Int {
     case topLeft = 0,
     topMiddle,
     topRight,
@@ -52,7 +52,7 @@ extension UIView {
     //
     
     ///Centers the view along X-axis in its superview.
-    func centerXInSuperview() {
+    @objc func centerXInSuperview() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
         newFrame.origin.x = superview.bounds.midX - self.bounds.midX
@@ -60,7 +60,7 @@ extension UIView {
     }
     
     ///Centers the view along Y-axis in its superview.
-    func centerYInSuperiew() {
+    @objc func centerYInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
         newFrame.origin.y = superview.bounds.midY - self.bounds.midY
@@ -68,7 +68,7 @@ extension UIView {
     }
     
     ///Centers the view in its superview.
-    func centerInSuperiew() {
+    @objc func centerInSuperiew() {
         guard let superview = self.superview else { return }
         var newFrame = self.frame
         newFrame.origin.x = superview.bounds.midX - self.bounds.midX
@@ -94,7 +94,7 @@ extension UIView {
      
      */
     
-    func pinTo(_ position:UIViewPinPosition) {
+    @objc func pinTo(_ position:UIViewPinPosition) {
         
         guard let superview = self.superview else { return }
         
@@ -154,7 +154,7 @@ extension UIView {
     ////////////////////////////////////////////////////////////////
     //
     
-    func setCornerRadius(_ amount:CGFloat, borderWidthAmount:CGFloat, borderColor:UIColor) {
+    @objc func setCornerRadius(_ amount:CGFloat, borderWidthAmount:CGFloat, borderColor:UIColor) {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
         self.layer.cornerRadius = amount
@@ -162,7 +162,7 @@ extension UIView {
         self.layer.borderWidth = borderWidthAmount
     }
 
-    func addShadow(withRadius radius:CGFloat = 25, opacity:Float = 0.3) {
+    @objc func addShadow(withRadius radius:CGFloat = 25, opacity:Float = 0.3) {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowRadius = radius
         self.layer.shadowOpacity = opacity
