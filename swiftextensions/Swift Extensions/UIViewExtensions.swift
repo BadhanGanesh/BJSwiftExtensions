@@ -43,44 +43,24 @@ import UIKit
 
 extension UIView {
     
-    //
-    ////////////////////////////////////////////////////////////////
-    //MARK:-
-    //MARK:View Positioning
-    //MARK:-
-    ////////////////////////////////////////////////////////////////
-    //
-    
-    ///Centers the view along X-axis in its superview.
-    @objc func centerXInSuperview() {
-        guard let superview = self.superview else { return }
-        var newFrame = self.frame
-        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
-        self.frame = newFrame
-    }
-    
-    ///Centers the view along Y-axis in its superview.
-    @objc func centerYInSuperiew() {
-        guard let superview = self.superview else { return }
-        var newFrame = self.frame
-        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
-        self.frame = newFrame
-    }
-    
-    ///Centers the view in its superview.
-    @objc func centerInSuperiew() {
-        guard let superview = self.superview else { return }
-        var newFrame = self.frame
-        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
-        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
-        self.frame = newFrame
-    }
-    
     /**
      
-     - Parameter position: The position you want to pin the view to its superview. See **Discussion** for possible values.
+     Pins the view to the specified position in its superview.
      
-     Pins the view to the specified position in its superview. Use one of the below values:
+     - Parameter position: The position you want to pin the view to its superview. See above for possible values.
+     - Parameter view: The reference view that you want the calling view to pin to. Supply `nil` to pin to the super view instead, in case of Objective-C.
+     
+     ```
+     //Example Usage
+     
+     //This pins `myView` to top left position of its super view.
+     self.myView.pinTo(.topLeft)
+     
+     //This pins `myView` to top left position of the supplied view ignoring super view.
+     self.myView.pinTo(.topLeft, in: self.view!)
+     ```
+     
+     Use one of the below values for the `UIViewPinPosition`:
      
      * topLeft
      * topMiddle
@@ -94,9 +74,9 @@ extension UIView {
      
      */
     
-    @objc func pinTo(_ position:UIViewPinPosition) {
-        
-        guard let superview = self.superview else { return }
+    @objc func pinTo(_ position:UIViewPinPosition, in view:UIView? = nil) {
+
+        guard let superview = view ?? superview else { return }
         
         var newFrame = self.frame
         
@@ -146,27 +126,95 @@ extension UIView {
         }
     }
     
-    //
-    ////////////////////////////////////////////////////////////////
-    //MARK:-
-    //MARK:View Styling
-    //MARK:-
-    ////////////////////////////////////////////////////////////////
-    //
+    /**
+     * Centers the view in its superview.
+     */
+    @objc func centerInSuperiew() {
+        guard let superview = self.superview else { return }
+        var newFrame = self.frame
+        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
+        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
+        self.frame = newFrame
+    }
     
-    @objc func setCornerRadius(_ amount:CGFloat, borderWidthAmount:CGFloat, borderColor:UIColor) {
+    /**
+     * Centers the view along Y-axis in its superview.
+     */
+    @objc func centerYInSuperiew() {
+        guard let superview = self.superview else { return }
+        var newFrame = self.frame
+        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
+        self.frame = newFrame
+    }
+    
+    /**
+     * Centers the view along X-axis in its superview.
+     */
+    @objc func centerXInSuperview() {
+        guard let superview = self.superview else { return }
+        var newFrame = self.frame
+        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
+        self.frame = newFrame
+    }
+    
+    /**
+     
+     Adds soft shadow to view by default in Swift. You have to supply radius and opacity values in case of Objective-C.
+     
+     You need to make the `view.layer.masksToBounds` to `false` for it to work.
+     
+     - Parameter radius: The blur radius (in points) used to render the layer’s shadow.
+     - Parameter opacity: The opacity of the layer’s shadow.
+     
+     */
+    @objc func addShadow(withRadius radius:CGFloat = 25, opacity:Float = 0.3) {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowOffset = .init(width: -2, height: 2)
+    }
+    
+    /**
+     * You know what it does!
+     */
+    @objc func roundCorners(amount:CGFloat, borderWidthAmount:CGFloat = 0, borderColor:UIColor = .clear) {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
         self.layer.cornerRadius = amount
         self.layer.borderColor = borderColor.cgColor
         self.layer.borderWidth = borderWidthAmount
     }
-
-    @objc func addShadow(withRadius radius:CGFloat = 25, opacity:Float = 0.3) {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowRadius = radius
-        self.layer.shadowOpacity = opacity
-        self.layer.shadowOffset = .init(width: -2, height: 2)
+    
+    /**
+     
+     This method, even though works for any UIView, is actually applicable to `UILabel`, `UITextView`, `UITextField` and basically any `UIView` descendant that has `text` property to it.
+     
+     ```
+     //Example usages
+     
+     let textField = UITextField()
+     textField.text = "Texttyyy"
+     
+     let textview1 = UITextView()
+     textview1.text = nil
+     
+     let textview2 = UITextView()
+     textview2.text = "Textview text"
+     
+     let view = UIView()
+     
+     print(textField.getText() as Any)   /* Optional("Texttyyy") */
+     print(textView1.getText() as Any)   /* nil */
+     print(textView2.getText() as Any)   /* Optional("Textview text") */
+     print(view.getText() as Any)        /* nil */
+     ```
+     
+     - Returns: An optional string value from the `text` property.
+     
+     */
+    @objc func getText() -> String? {
+        return self.responds(to: #selector(getter: UILabel.text)) ?
+            self.perform(#selector(getter: UILabel.text))?.takeUnretainedValue() as? String : nil
     }
     
 }
