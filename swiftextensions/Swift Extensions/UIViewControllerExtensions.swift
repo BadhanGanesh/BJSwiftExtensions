@@ -31,6 +31,10 @@ import UIKit
 
 extension UIViewController {
     
+    /**
+     Shows a simple alert view from the view controller with an **Ok** action button.     
+     - Author: Badhan Ganesh
+     */
     @objc func showSimpleAlertWithTitle(_ title:String?, message:String?) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = .blue

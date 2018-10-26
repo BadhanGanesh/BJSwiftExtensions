@@ -72,6 +72,8 @@ extension UIView {
      * middleLeft
      * middle
      
+     - Author: Badhan Ganesh
+     
      */
     
     @objc func pinTo(_ position:UIViewPinPosition, in view:UIView? = nil) {
@@ -127,7 +129,8 @@ extension UIView {
     }
     
     /**
-     * Centers the view in its superview.
+     Centers the view in its superview.
+     - Author: Badhan Ganesh
      */
     @objc func centerInSuperiew() {
         guard let superview = self.superview else { return }
@@ -138,7 +141,8 @@ extension UIView {
     }
     
     /**
-     * Centers the view along Y-axis in its superview.
+     Centers the view along Y-axis in its superview.
+     - Author: Badhan Ganesh
      */
     @objc func centerYInSuperiew() {
         guard let superview = self.superview else { return }
@@ -148,7 +152,8 @@ extension UIView {
     }
     
     /**
-     * Centers the view along X-axis in its superview.
+     Centers the view along X-axis in its superview.
+     - Author: Badhan Ganesh
      */
     @objc func centerXInSuperview() {
         guard let superview = self.superview else { return }
@@ -166,6 +171,8 @@ extension UIView {
      - Parameter radius: The blur radius (in points) used to render the layer’s shadow.
      - Parameter opacity: The opacity of the layer’s shadow.
      
+     - Author: Badhan Ganesh
+     
      */
     @objc func addShadow(withRadius radius:CGFloat = 25, opacity:Float = 0.3) {
         self.layer.shadowColor = UIColor.black.cgColor
@@ -175,7 +182,8 @@ extension UIView {
     }
     
     /**
-     * You know what it does!
+     You know what it does!
+     - Author: Badhan Ganesh
      */
     @objc func roundCorners(amount:CGFloat, borderWidthAmount:CGFloat = 0, borderColor:UIColor = .clear) {
         self.layer.masksToBounds = true
@@ -210,6 +218,8 @@ extension UIView {
      ```
      
      - Returns: An optional string value from the `text` property.
+     
+     - Author: Badhan Ganesh
      
      */
     @objc func getText() -> String? {

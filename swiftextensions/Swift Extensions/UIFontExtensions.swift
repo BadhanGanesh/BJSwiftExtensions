@@ -32,12 +32,15 @@ import UIKit
 extension UIFont {
     
     /**
-     * A handy function which normalizes the font size for all the devices. If you call this method on a `UILabel`, the text will appear in the same size visually across different devices so you don't have to worry about setting different font sizes for devices like **iPhone 4s, iPhone 5, iPhone 8 plus, X's, and iPad's**.
      
-     * When initially setting font for the label (either in Interface Builder or in code), always set for the smallest-sized device, iPhone SE. This method works by scaling the font size by multiplying it with a multiplier value. Since it is an incremental scaling, you have to set the font size for the smallest device, so that the size scales properly throughout all bigger deivces.
+     A handy function which normalizes the font size for all the devices. If you call this method on a `UILabel`, the text will appear in the same size visually across different devices so you don't have to worry about setting different font sizes for devices like **iPhone 4s, iPhone 5, iPhone 8 plus, X's, and iPad's**.
      
-     * - Author: Badhan Ganesh
-     * - Returns: The normalized font.
+     When initially setting font for the label (either in Interface Builder or in code), always set for the smallest-sized device, iPhone SE. This method works by scaling the font size by multiplying it with a multiplier value. Since it is an incremental scaling, you have to set the font size for the smallest device, so that the size scales properly throughout all bigger deivces.
+    
+     - Returns: The normalized font.
+     
+     - Author: Badhan Ganesh
+     
      */
     
     @objc func normalized() -> UIFont {
