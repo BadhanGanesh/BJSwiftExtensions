@@ -42,7 +42,7 @@ import UIKit
 }
 
 extension UIView {
-
+    
     /**
      
      Pins the view to the specified position in its superview using autolayout constraints. NOTE: If you already have added any constraints that are conflicting, they will be deactivated and removed.
@@ -111,7 +111,7 @@ extension UIView {
             ////////Remove old added constraints////////
             ////////////////////////////////////////////
             
-            if constraint.identifier?.contains("BJConstraint") ?? false {
+            if constraint.identifier?.contains("\(self.pointerString)") ?? false {
                 constraint.isActive = false
                 superview.removeConstraint(constraint)
             }
@@ -119,22 +119,22 @@ extension UIView {
         }
         
         let centerXConstraint = self.centerXAnchor.constraint(equalTo: superview.centerXAnchor)
-        centerXConstraint.identifier = "BJConstraintCenterX"
+        centerXConstraint.identifier = "BJConstraintCenterX - \(self.pointerString)"
         
         let centerYConstraint = self.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
-        centerYConstraint.identifier = "BJConstraintCenterY"
+        centerYConstraint.identifier = "BJConstraintCenterY - \(self.pointerString)"
         
         let leadingConstraint = self.leadingAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.leadingAnchor : superview.leadingAnchor)
-        leadingConstraint.identifier = "BJConstraintLeading"
+        leadingConstraint.identifier = "BJConstraintLeading - \(self.pointerString)"
         
         let trailingConstraint = self.trailingAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.trailingAnchor : superview.trailingAnchor)
-        trailingConstraint.identifier = "BJConstraintTrailing"
+        trailingConstraint.identifier = "BJConstraintTrailing - \(self.pointerString)"
         
         let topConstraint = self.topAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.topAnchor : superview.topAnchor)
-        topConstraint.identifier = "BJConstraintTop"
+        topConstraint.identifier = "BJConstraintTop - \(self.pointerString)"
         
         let bottomConstraint = self.bottomAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.bottomAnchor : superview.bottomAnchor)
-        bottomConstraint.identifier = "BJConstraintBottom"
+        bottomConstraint.identifier = "BJConstraintBottom - \(self.pointerString)"
         
         switch position {
         case .topLeft:
@@ -233,4 +233,14 @@ extension UIView {
             self.perform(#selector(getter: UILabel.text))?.takeUnretainedValue() as? String : nil
     }
     
+}
+
+/**
+ * Neat little extension to get the memory address of a variable, from this SO answer:
+ * https://stackoverflow.com/a/41067053/5912335
+ */
+public extension NSObject {
+    public var pointerString: String {
+        return String(format: "%p", self)
+    }
 }
