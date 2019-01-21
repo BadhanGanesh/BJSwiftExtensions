@@ -12,14 +12,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Round corners
         self.view.viewWithTag(100)?.roundCorners(amount: (self.view.viewWithTag(100)?.bounds.midX)!)
     }
     
     @IBAction func pinButtonTouched(_ sender: UIButton) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-            //Pin to tapped button position
             self.view.viewWithTag(100)?.pinTo(UIViewPinPosition(rawValue: sender.tag)!)
+            self.view.layoutIfNeeded()
         }, completion: nil)
     }
     

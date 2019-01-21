@@ -42,13 +42,12 @@ import UIKit
 }
 
 extension UIView {
-    
+
     /**
      
-     Pins the view to the specified position in its superview.
+     Pins the view to the specified position in its superview using autolayout constraints. NOTE: If you already have added any constraints that are conflicting, they will be deactivated and removed.
      
      - Parameter position: The position you want to pin the view to its superview. See above for possible values.
-     - Parameter view: The reference view that you want the calling view to pin to. Supply `nil` to pin to the super view instead, in case of Objective-C.
      
      ```
      //Example Usage
@@ -73,88 +72,97 @@ extension UIView {
      * middle
      
      */
-    
-    @objc func pinTo(_ position:UIViewPinPosition, in view:UIView? = nil) {
-
-        guard let superview = view ?? superview else { return }
+    @objc func pinTo(_ position:UIViewPinPosition) {
         
-        var newFrame = self.frame
+        guard let superview = self.superview else { return }
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        ///////////////////////////////////////////////////////////
+        ////////Add width and height constraints from frame////////
+        ///////////////////////////////////////////////////////////
+        
+        let width = self.bounds.width
+        let height = self.bounds.height
+        
+        if self.bounds.size != .zero {
+            if self.constraints.isEmpty {
+                self.addConstraints([self.widthAnchor.constraint(equalToConstant: width),
+                                     self.heightAnchor.constraint(equalToConstant: height)])
+            }
+        }
+        
+        for constraint in superview.constraints {
+            
+            ///////////////////////////////////////////////////////
+            ////////Remove possible conflicting constraints////////
+            ///////////////////////////////////////////////////////
+            
+            if constraint.firstAttribute != .width && constraint.firstAttribute != .height {
+                if let firstItem = constraint.firstItem as? UIView, firstItem == self {
+                    superview.removeConstraint(constraint)
+                }
+            }
+            
+            ////////////////////////////////////////////
+            ////////Remove old added constraints////////
+            ////////////////////////////////////////////
+            
+            if constraint.identifier?.contains("BJConstraint") ?? false {
+                constraint.isActive = false
+                superview.removeConstraint(constraint)
+            }
+            
+        }
+        
+        let centerXConstraint = self.centerXAnchor.constraint(equalTo: superview.centerXAnchor)
+        centerXConstraint.identifier = "BJConstraintCenterX"
+        
+        let centerYConstraint = self.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
+        centerYConstraint.identifier = "BJConstraintCenterY"
+        
+        let leadingConstraint = self.leadingAnchor.constraint(equalTo: superview.leadingAnchor)
+        leadingConstraint.identifier = "BJConstraintLeading"
+        
+        let trailingConstraint = self.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+        trailingConstraint.identifier = "BJConstraintTrailing"
+        
+        let topConstraint = self.topAnchor.constraint(equalTo: superview.topAnchor)
+        topConstraint.identifier = "BJConstraintTop"
+        
+        let bottomConstraint = self.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+        bottomConstraint.identifier = "BJConstraintBottom"
         
         switch position {
         case .topLeft:
-            newFrame.origin = .zero
-            self.frame = newFrame
+            superview.addConstraints([leadingConstraint, topConstraint])
             break
         case .topMiddle:
-            newFrame.origin.x = superview.bounds.midX - self.bounds.midX
-            newFrame.origin.y = 0
-            self.frame = newFrame
+            superview.addConstraints([centerXConstraint, topConstraint])
             break
         case .topRight:
-            newFrame.origin.x = superview.bounds.width - self.bounds.width
-            newFrame.origin.y = 0
-            self.frame = newFrame
+            superview.addConstraints([trailingConstraint, topConstraint])
             break
         case .middleLeft:
-            newFrame.origin.x = 0
-            newFrame.origin.y = superview.bounds.midY - self.bounds.midY
-            self.frame = newFrame
+            superview.addConstraints([centerYConstraint, leadingConstraint])
             break
         case .bottomLeft:
-            newFrame.origin.x = 0
-            newFrame.origin.y = superview.bounds.height - self.bounds.height
-            self.frame = newFrame
+            superview.addConstraints([bottomConstraint, leadingConstraint])
             break
         case .bottomMiddle:
-            newFrame.origin.x = superview.bounds.midX - self.bounds.midX
-            newFrame.origin.y = superview.bounds.height - self.bounds.height
-            self.frame = newFrame
+            superview.addConstraints([bottomConstraint, centerXConstraint])
             break
         case .bottomRight:
-            newFrame.origin.x = superview.bounds.width - self.bounds.width
-            newFrame.origin.y = superview.bounds.height - self.bounds.height
-            self.frame = newFrame
+            superview.addConstraints([bottomConstraint, trailingConstraint])
             break
         case .middleRight:
-            newFrame.origin.x = superview.bounds.width - self.bounds.width
-            newFrame.origin.y = superview.bounds.midY - self.bounds.midY
-            self.frame = newFrame
+            superview.addConstraints([centerYConstraint, trailingConstraint])
             break
         case .middle:
-            self.centerInSuperiew()
+            superview.addConstraints([centerYConstraint, centerXConstraint])
             break
         }
-    }
-    
-    /**
-     * Centers the view in its superview.
-     */
-    @objc func centerInSuperiew() {
-        guard let superview = self.superview else { return }
-        var newFrame = self.frame
-        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
-        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
-        self.frame = newFrame
-    }
-    
-    /**
-     * Centers the view along Y-axis in its superview.
-     */
-    @objc func centerYInSuperiew() {
-        guard let superview = self.superview else { return }
-        var newFrame = self.frame
-        newFrame.origin.y = superview.bounds.midY - self.bounds.midY
-        self.frame = newFrame
-    }
-    
-    /**
-     * Centers the view along X-axis in its superview.
-     */
-    @objc func centerXInSuperview() {
-        guard let superview = self.superview else { return }
-        var newFrame = self.frame
-        newFrame.origin.x = superview.bounds.midX - self.bounds.midX
-        self.frame = newFrame
+        
     }
     
     /**
