@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     @IBAction func pinButtonTouched(_ sender: UIButton) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-            self.view.viewWithTag(100)?.pinTo(UIViewPinPosition(rawValue: sender.tag)!)
+            self.view.viewWithTag(100)?.pinTo(UIViewPinPosition(rawValue: sender.tag)!, shouldRespectSafeArea:true)
             self.view.layoutIfNeeded()
         }, completion: nil)
     }

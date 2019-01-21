@@ -48,6 +48,7 @@ extension UIView {
      Pins the view to the specified position in its superview using autolayout constraints. NOTE: If you already have added any constraints that are conflicting, they will be deactivated and removed.
      
      - Parameter position: The position you want to pin the view to its superview. See above for possible values.
+     - Parameter shouldRespectSafeArea: Pass `true` to take the superview's safe area layout guide into account when pinning. Default is `false`
      
      ```
      //Example Usage
@@ -74,7 +75,7 @@ extension UIView {
      - Author: Badhan Ganesh
      
      */
-    @objc func pinTo(_ position:UIViewPinPosition) {
+    @objc func pinTo(_ position:UIViewPinPosition, shouldRespectSafeArea:Bool = false) {
         
         guard let superview = self.superview else { return }
         
@@ -123,16 +124,16 @@ extension UIView {
         let centerYConstraint = self.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
         centerYConstraint.identifier = "BJConstraintCenterY"
         
-        let leadingConstraint = self.leadingAnchor.constraint(equalTo: superview.leadingAnchor)
+        let leadingConstraint = self.leadingAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.leadingAnchor : superview.leadingAnchor)
         leadingConstraint.identifier = "BJConstraintLeading"
         
-        let trailingConstraint = self.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+        let trailingConstraint = self.trailingAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.trailingAnchor : superview.trailingAnchor)
         trailingConstraint.identifier = "BJConstraintTrailing"
         
-        let topConstraint = self.topAnchor.constraint(equalTo: superview.topAnchor)
+        let topConstraint = self.topAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.topAnchor : superview.topAnchor)
         topConstraint.identifier = "BJConstraintTop"
         
-        let bottomConstraint = self.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+        let bottomConstraint = self.bottomAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.bottomAnchor : superview.bottomAnchor)
         bottomConstraint.identifier = "BJConstraintBottom"
         
         switch position {
