@@ -45,19 +45,19 @@ extension UIView {
     
     /**
      
-     Pins the view to the specified position in its superview using autolayout constraints. NOTE: If you already have added any constraints that are conflicting, they will be deactivated and removed.
+     Pins the view to the specified position in its superview using autolayout constraints. **NOTE:** If you already have added any constraints that are conflicting for the constraints going to be added for the supplied `position`, they will be deactivated and removed.
      
      - Parameter position: The position you want to pin the view to its superview. See above for possible values.
-     - Parameter shouldRespectSafeArea: Pass `true` to take the superview's safe area layout guide into account when pinning. Default is `false`
+     - Parameter shouldRespectSafeArea: Pass `true` to take the superview's safe area layout guide into account when pinning. Default is `false`. **NOTE:** This parameter will be ignored for iOS versions below 11.0.
      
      ```
      //Example Usage
      
-     //This pins `myView` to top left position of its super view.
+     //This pins `myView` to top left of its super view.
      self.myView.pinTo(.topLeft)
      
-     //This pins `myView` to top left position of the supplied view ignoring super view.
-     self.myView.pinTo(.topLeft, in: self.view!)
+     //This pins `myView` to top right of its super view respecting its safe area layout guide.
+     self.myView.pinTo(.topRight, shouldRespectSafeArea:true)
      ```
      
      Use one of the below values for the `UIViewPinPosition`:
@@ -81,17 +81,17 @@ extension UIView {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        ///////////////////////////////////////////////////////////
-        ////////Add width and height constraints from frame////////
-        ///////////////////////////////////////////////////////////
+        var shouldConsiderSafeArea = shouldRespectSafeArea
+        if #available(iOS 11.0, *) { } else { shouldConsiderSafeArea = false }
         
-        let width = self.bounds.width
-        let height = self.bounds.height
+        ///////////////////////////////////////////////////////////////////
+        ////////Add width and height constraints from view's bounds////////
+        ///////////////////////////////////////////////////////////////////
         
         if self.bounds.size != .zero {
             if self.constraints.isEmpty {
-                self.addConstraints([self.widthAnchor.constraint(equalToConstant: width),
-                                     self.heightAnchor.constraint(equalToConstant: height)])
+                self.addConstraints([self.widthAnchor.constraint(equalToConstant: self.bounds.width),
+                                     self.heightAnchor.constraint(equalToConstant: self.bounds.height)])
             }
         }
         
@@ -118,23 +118,47 @@ extension UIView {
             
         }
         
+        ///////////////////////////////////////////////////////
+        ////////Use Safe Area for iOS 11 and above only////////
+        ///////////////////////////////////////////////////////
+        
+        var safeAreaLeadingAnchor:NSLayoutXAxisAnchor?
+        var safeAreaTrailingAnchor:NSLayoutXAxisAnchor?
+        var safeAreaTopAnchor:NSLayoutYAxisAnchor?
+        var safeAreaBottomAnchor:NSLayoutYAxisAnchor?
+        
+        if #available(iOS 11.0, *) {
+            safeAreaLeadingAnchor = superview.safeAreaLayoutGuide.leadingAnchor
+            safeAreaTrailingAnchor = superview.safeAreaLayoutGuide.trailingAnchor
+            safeAreaTopAnchor = superview.safeAreaLayoutGuide.topAnchor
+            safeAreaBottomAnchor = superview.safeAreaLayoutGuide.bottomAnchor
+        }
+        
+        ///////////////////////////////////////////////
+        ////////Prepare constraints to be added////////
+        ///////////////////////////////////////////////
+        
         let centerXConstraint = self.centerXAnchor.constraint(equalTo: superview.centerXAnchor)
         centerXConstraint.identifier = "BJConstraintCenterX - \(self.pointerString)"
         
         let centerYConstraint = self.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
         centerYConstraint.identifier = "BJConstraintCenterY - \(self.pointerString)"
         
-        let leadingConstraint = self.leadingAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.leadingAnchor : superview.leadingAnchor)
+        let leadingConstraint = self.leadingAnchor.constraint(equalTo: shouldConsiderSafeArea ? safeAreaLeadingAnchor! : superview.leadingAnchor)
         leadingConstraint.identifier = "BJConstraintLeading - \(self.pointerString)"
         
-        let trailingConstraint = self.trailingAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.trailingAnchor : superview.trailingAnchor)
+        let trailingConstraint = self.trailingAnchor.constraint(equalTo: shouldConsiderSafeArea ? safeAreaTrailingAnchor! : superview.trailingAnchor)
         trailingConstraint.identifier = "BJConstraintTrailing - \(self.pointerString)"
         
-        let topConstraint = self.topAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.topAnchor : superview.topAnchor)
+        let topConstraint = self.topAnchor.constraint(equalTo: shouldConsiderSafeArea ? safeAreaTopAnchor! : superview.topAnchor)
         topConstraint.identifier = "BJConstraintTop - \(self.pointerString)"
         
-        let bottomConstraint = self.bottomAnchor.constraint(equalTo: shouldRespectSafeArea ? superview.safeAreaLayoutGuide.bottomAnchor : superview.bottomAnchor)
+        let bottomConstraint = self.bottomAnchor.constraint(equalTo: shouldConsiderSafeArea ? safeAreaBottomAnchor! : superview.bottomAnchor)
         bottomConstraint.identifier = "BJConstraintBottom - \(self.pointerString)"
+        
+        ////////////////////////////////////////
+        ////////Add relevant constraints////////
+        ////////////////////////////////////////
         
         switch position {
         case .topLeft:
@@ -170,7 +194,7 @@ extension UIView {
     
     /**
      
-     Adds soft shadow to view by default in Swift. You have to supply radius and opacity values in case of Objective-C.
+     Adds soft shadow to view.
      
      You need to make the `view.layer.masksToBounds` to `false` for it to work.
      
