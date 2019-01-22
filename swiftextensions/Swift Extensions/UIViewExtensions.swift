@@ -190,6 +190,8 @@ extension UIView {
             break
         }
         
+        CATransaction.flush()
+        
     }
     
     /**
